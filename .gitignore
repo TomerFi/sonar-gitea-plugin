@@ -31,7 +31,5 @@ docs
 !lib/*
 
 # Mvn Wrapper
-mvnw
-mvnw.cmd
 .mvn/**/*.*
 !.mvn/wrapper/maven-wrapper.properties
