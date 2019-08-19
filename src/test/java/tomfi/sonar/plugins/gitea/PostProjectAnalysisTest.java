@@ -39,9 +39,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.InetAddress;
 import java.net.URISyntaxException;
-import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -82,6 +80,7 @@ public final class PostProjectAnalysisTest
     private static final int FAKE_PR_ISSUE_NUMBER = 35;
     private static final String FAKE_METRIC_KEY = "fakeconditionmetrikkey";
 
+    private static final String MOCK_SERVER_HOST = "localhost";
     private static final int MOCK_SERVER_PORT = 1234;
 
     private static final List<Header> CUSTOM_HEADERS = Arrays.asList(
@@ -124,12 +123,10 @@ public final class PostProjectAnalysisTest
     };
 
     private static MockServerClient registerClientWithResponseJson(
-        final String serverAddress, final Method method, final String path, final String bodyFile
+        final Method method, final String path, final String bodyFile
     )
     {
-        final MockServerClient retObj = new MockServerClient(
-            serverAddress, mockServer.getLocalPort()
-        );
+        final MockServerClient retObj = new MockServerClient(MOCK_SERVER_HOST, mockServer.getLocalPort());
         retObj
             .when(
                 HttpRequest.request()
@@ -146,12 +143,10 @@ public final class PostProjectAnalysisTest
     }
 
     private static MockServerClient registerClientWithRequestRegex(
-        final String serverAddress, final Method method, final String path, final String regexFile
+        final Method method, final String path, final String regexFile
     )
     {
-        final MockServerClient retObj = new MockServerClient(
-            serverAddress, mockServer.getLocalPort()
-        );
+        final MockServerClient retObj = new MockServerClient(MOCK_SERVER_HOST, mockServer.getLocalPort());
         retObj
             .when(
                 HttpRequest.request()
@@ -168,24 +163,20 @@ public final class PostProjectAnalysisTest
 
     @BeforeAll
     @DisplayName("Start the mock server and mock clients for mocking the Gitea api.")
-    public static void startMockServerClient() throws FileNotFoundException, UnknownHostException
+    public static void startMockServerClient() throws FileNotFoundException
     {
-        final String serverAddress = InetAddress.getLocalHost().getHostAddress();
         mockServer = ClientAndServer.startClientAndServer(MOCK_SERVER_PORT);
         getRepoSearchClient = registerClientWithResponseJson(
-            serverAddress,
             Method.GET,
             "/api/v1/repos/search",
             "search_repos_response.json"
         );
         getRepoPullsClient = registerClientWithResponseJson(
-            serverAddress,
             Method.GET,
             String.format("/api/v1/repos/%s/pulls", FAKE_REPO_FULL_NAME),
             "get_pulls_response.json"
         );
         postIssueCommentClient = registerClientWithRequestRegex(
-            serverAddress,
             Method.POST,
             String.format(
                 "/api/v1/repos/%s/issues/%d/comments",
@@ -195,30 +186,25 @@ public final class PostProjectAnalysisTest
             "comment_on_issue_request_regex.txt"
         );
         getRepoLabelsClient = registerClientWithResponseJson(
-            serverAddress,
             Method.GET,
             String.format("/api/v1/repos/%s/labels", FAKE_REPO_FULL_NAME),
             "get_repo_labels_result.json"
         );
         postCreateRepoLabelClient = registerClientWithResponseJson(
-            serverAddress,
             Method.POST,
             String.format("/api/v1/repos/%s/labels", FAKE_REPO_FULL_NAME),
             "create_repo_label_result.json"
         );
         getRepoPullInfoClient = registerClientWithResponseJson(
-            serverAddress,
             Method.GET,
             String.format("/api/v1/repos/%s/pulls/%d", FAKE_REPO_FULL_NAME, FAKE_PR_ISSUE_NUMBER),
             "get_repo_pull_info.json"
         );
         patchLabelsOnPrClient = registerClientWithRequestRegex(
-            serverAddress,
             Method.PATCH,
             String.format("/api/v1/repos/%s/pulls/%d", FAKE_REPO_FULL_NAME, FAKE_PR_ISSUE_NUMBER),
             "patch_labels_on_pr_result.txt"
         );
-        initConfiguration(serverAddress);
     }
 
     @AfterAll
@@ -235,7 +221,9 @@ public final class PostProjectAnalysisTest
         mockServer.stop();
     }
 
-    private static void initConfiguration(final String serverAddress)
+    @BeforeAll
+    @DisplayName("Create mock for configuring the plugin")
+    public static void initConfiguration()
     {
         //Mock the Configuration class for configuring the plugin.
         mockConfiguration = Mockito.mock(Configuration.class);
@@ -249,7 +237,7 @@ public final class PostProjectAnalysisTest
             mockConfiguration.get(PROP_GITEA_URL)
         ).thenReturn(
             Optional.of(
-                String.join("", "http://", serverAddress, ":", String.valueOf(MOCK_SERVER_PORT))
+                String.join("", "http://", MOCK_SERVER_HOST, ":", String.valueOf(MOCK_SERVER_PORT))
             )
         );
     }
