@@ -1,7 +1,7 @@
 # Gitea SonarQube Plugin</br>[![shields-io-maintenance]][0] [![travis-build-status]][1] [![coveralls-coverage-status]][2]
 
-This project is WIP (work in progress), pre-release.
-The idea is a `SonarQube` plugin that adds a comment containing the QualityGate metrics to the `Gitea` pull reqeusts,</br>
+This project is WIP (work in progress), a pre-release.</br>
+The idea is a `SonarQube` plugin that adds a comment containing the QualityGate metrics to `Gitea`'s pull reqeusts,</br>
 as well as labeling it as *passed* or *failed*.
 
 ## Install
