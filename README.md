@@ -1,4 +1,4 @@
-# Gitea SonarQube Plugin</br>[![shields-io-maintenance]][0] [![travis-build-status]][1] [![coveralls-coverage-status]][2]
+# Gitea SonarQube Plugin</br>[![shields-io-maintenance]][0] [![travis-build-status]][1] [![coveralls-coverage-status]][2]</br>[![quality-gate-status]][3] [![maintainability-rating]][3] [![reliability-rating]][3] [![security-rating]][3]
 
 This project is WIP (work in progress), a pre-release.</br>
 The idea is a `SonarQube` plugin that adds a comment containing the QualityGate metrics to `Gitea`'s pull reqeusts,</br>
@@ -56,8 +56,14 @@ Please check the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before contributing.
 [0]: https://github.com/TomerFi/sonar-gitea-plugin
 [1]: https://travis-ci.org/TomerFi/sonar-gitea-plugin
 [2]: https://coveralls.io/github/TomerFi/sonar-gitea-plugin
+[3]: https://sonarcloud.io/dashboard?id=info.tomfi%3Asonar-gitea-plugin
 
 <!-- Badges Links -->
 [coveralls-coverage-status]: https://coveralls.io/repos/github/TomerFi/sonar-gitea-plugin/badge.svg
+[maintainability-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=sqale_rating
+[reliability-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=reliability_rating
+[security-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=security_rating
 [shields-io-maintenance]: https://img.shields.io/badge/Maintained%3F-yes-green.svg
+[technical-debt]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=sqale_index
 [travis-build-status]: https://travis-ci.org/TomerFi/sonar-gitea-plugin.svg?branch=dev
+[quality-gate-status]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=alert_status
