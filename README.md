@@ -1,4 +1,4 @@
-# Gitea SonarQube Plugin</br>[![Build Status](https://travis-ci.org/TomerFi/sonar-gitea-plugin.svg?branch=dev)](https://travis-ci.org/TomerFi/sonar-gitea-plugin) [![Coverage Status](https://coveralls.io/repos/github/TomerFi/sonar-gitea-plugin/badge.svg)](https://coveralls.io/github/TomerFi/sonar-gitea-plugin)
+# Gitea SonarQube Plugin</br>[![shields-io-maintenance]][0] [![travis-build-status]][1] [![coveralls-coverage-status]][2]
 
 This project is WIP (work in progress), pre-release.
 The idea is a `SonarQube` plugin that adds a comment containing the QualityGate metrics to the `Gitea` pull reqeusts,</br>
@@ -13,7 +13,7 @@ as well as labeling it as *passed* or *failed*.
 ./mvnw.cmd package
 ```
 
-Will create the `jar` file under the `maven`'s  `target` folder.</br>
+This will create the `jar` file under the `maven`'s  `target` folder.</br>
 Place the created `jar` file in your `SonarQube` plugins folder and restart.
 
 ## Configuring
@@ -51,3 +51,13 @@ Please check the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before contributing.
 ## License
 
 [MIT License](LICENSE).
+
+<!-- Real Links -->
+[0]: https://github.com/TomerFi/sonar-gitea-plugin
+[1]: https://travis-ci.org/TomerFi/sonar-gitea-plugin
+[2]: https://coveralls.io/github/TomerFi/sonar-gitea-plugin
+
+<!-- Badges Links -->
+[coveralls-coverage-status]: https://coveralls.io/repos/github/TomerFi/sonar-gitea-plugin/badge.svg
+[shields-io-maintenance]: https://img.shields.io/badge/Maintained%3F-yes-green.svg
+[travis-build-status]: https://travis-ci.org/TomerFi/sonar-gitea-plugin.svg?branch=dev
