@@ -298,6 +298,6 @@ public final class PostProjectAnalysisTest
 
         System.setOut(stdout);
 
-        assertThat(tempout.toString()).doesNotContain("ERROR");
+        assertThat(tempout.toString()).doesNotContain("ERROR", "Exception");
     }
 }
