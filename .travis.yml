@@ -24,8 +24,7 @@ cache:
     - $HOME/.sonar/cache
 
 git:
-  depth: 3
-  quiet: true
+  depth: false
 
 before_script:
   - chmod +x mvnw
