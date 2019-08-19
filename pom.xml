@@ -109,7 +109,7 @@
   <licenses>
     <license>
       <name>MIT License</name>
-      <url>https://github.com/TomerFi/sonar-gitea-plugin/blob/dev/LICENSE</url>
+      <url>https://www.opensource.org/licenses/mit-license.php</url>
       <distribution>manual</distribution>
     </license>
   </licenses>
@@ -369,6 +369,7 @@
           <header>LICENSE</header>
           <excludes>
             <exclude>**/package-info.java</exclude>
+            <exclude>**/.mvn/**</exclude>
           </excludes>
           <includes>
             <include>**/*.java</include>
