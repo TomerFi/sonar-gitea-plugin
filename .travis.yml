@@ -3,12 +3,16 @@ language: java
 sudo: false
 install: skip
 
+addons:
+  sonarcloud:
+    organization: "tomerfi"
+
 matrix:
   include:
     - jdk: oraclejdk8
       dist: trusty
       after_success:
-        - ./mvnw sonar:sonar -Pcoverage -B -ff
+        - ./mvnw sonar:sonar -Dsonar.host.url=https://sonarcloud.io -B -ff
     - jdk: openjdk8
       dist: xenial
       after_success:
@@ -16,7 +20,8 @@ matrix:
 
 cache:
   directories:
-    - $HOME/.m2
+    - $HOME/.m2/repository
+    - $HOME/.sonar/cache
 
 git:
   depth: 3
