@@ -6,7 +6,7 @@ install: skip
 matrix:
   include:
     - jdk: oraclejdk8
-      dist: bionic
+      dist: trusty
     - jdk: openjdk8
       dist: xenial
 
@@ -19,10 +19,10 @@ git:
   quiet: true
 
 before_script:
-  - mvn clean -B -ff
+  - mvnw clean -B -ff
 
 script:
-  - mvn verify -B -ff
+  - mvnw verify -B -ff
 
 after_success:
-  - mvn coveralls:report -B -ff
+  - mvnw coveralls:report -B -ff
