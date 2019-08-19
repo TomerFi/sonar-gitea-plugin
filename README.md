@@ -1,4 +1,4 @@
-# Gitea SonarQube Plugin
+# Gitea SonarQube Plugin</br>[![Build Status](https://travis-ci.org/TomerFi/sonar-gitea-plugin.svg?branch=dev)](https://travis-ci.org/TomerFi/sonar-gitea-plugin) [![Coverage Status](https://coveralls.io/repos/github/TomerFi/sonar-gitea-plugin/badge.svg)](https://coveralls.io/github/TomerFi/sonar-gitea-plugin)
 
 This project is WIP (work in progress), pre-release.
 The idea is a `SonarQube` plugin that adds a comment containing the QualityGate metrics to the `Gitea` pull reqeusts,</br>
