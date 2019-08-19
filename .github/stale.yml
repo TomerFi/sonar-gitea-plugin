@@ -1,0 +1,42 @@
+# Configuration for probot-stale - https://github.com/apps/stale
+---
+
+daysUntilStale: 60
+daysUntilClose: 7
+onlyLabels: []
+exemptLabels:
+  - "wip"
+  - "work in progress"
+  - "work-in-progress"
+  - "pinned"
+  - "security"
+  - "help wanted"
+  - "help-wanted"
+  - "first timers only"
+  - "first-timers-only"
+  - "up for grabs"
+  - "up-for-grabs"
+exemptProjects: false
+exemptMilestones: false
+exemptAssignees: false
+staleLabel: wontfix
+markComment: >
+  This issue has been automatically marked as stale because it has not had
+  recent activity. It will be closed if no further activity occurs. Thank you
+  for your contributions.
+# unmarkComment: >
+#   Your comment here.
+# closeComment: >
+#   Your comment here.
+limitPerRun: 30
+only: issues
+# pulls:
+#   daysUntilStale: 30
+#   markComment: >
+#     This pull request has been automatically marked as stale because it has not had
+#     recent activity. It will be closed if no further activity occurs. Thank you
+#     for your contributions.
+issues:
+  exemptLabels:
+    - confirmed issue
+    - confirmed-issue

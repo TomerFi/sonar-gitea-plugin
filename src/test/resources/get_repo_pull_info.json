@@ -1,0 +1,11 @@
+{
+    "labels": [
+        {
+            "name": "SonarQube: failed",
+            "description": "Label indicating the failing of SonarQube quality gate.",
+            "color": "#EE0701",
+            "id": 42,
+            "url": ""
+        }
+    ]
+}

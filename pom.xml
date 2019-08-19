@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>info.tomfi</groupId>
+  <artifactId>sonar-gitea-plugin</artifactId>
+  <version>0.0.2</version>
+  <packaging>sonar-plugin</packaging>
+
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.5.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.13.2</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.0.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-client-java -->
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-client-java</artifactId>
+      <version>5.6.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-netty -->
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-netty</artifactId>
+      <version>5.6.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-nop</artifactId>
+      <version>1.7.28</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.sonarsource.sonarqube/sonar-plugin-api -->
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>7.9.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.sonarsource.sonarqube/sonar-ws -->
+    <!--<dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-ws</artifactId>
+      <version>7.9.1</version>
+    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/org.sonarsource.sonarqube/sonar-testing-harness -->
+    <!--<dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-testing-harness</artifactId>
+      <version>7.9.1</version>
+      <scope>test</scope>
+    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.9</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+  </dependencies>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <maven.install.skip>true</maven.install.skip>
+    <sonar.sources>src/main/java</sonar.sources>
+    <plugin.configuration.jacoco.coverage.minimum>85%</plugin.configuration.jacoco.coverage.minimum>
+  </properties>
+
+  <name>Sonar Gitea Plugin</name>
+  <description>Sonar plugin for updating the pull request conversation with metrics and labeling it.</description>
+  <url>https://github.com/TomerFi/sonar-gitea-plugin</url>
+  <inceptionYear>2019</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://github.com/TomerFi/sonar-gitea-plugin/blob/dev/LICENSE</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>TomFi</name>
+    <url>https://github.com/TomerFi</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>tomerfi</id>
+      <name>Tomer Figenblat</name>
+      <email>tomer.figenblat@gmail.com</email>
+      <url>https://github.com/TomerFi</url>
+      <roles>
+        <role>Java developer</role>
+      </roles>
+      <timezone>Asia/Jerusalem</timezone>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/TomerFi/sonar-gitea-plugin/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/TomerFi/sonar-gitea-plugin</url>
+    <connection>scm:git:git://github.com/TomerFi/sonar-gitea-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:TomerFi/sonar-gitea-plugin.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <ciManagement>
+    <system>Travis CI</system>
+    <url>https://travis-ci.org/TomerFi/sonar-gitea-plugin</url>
+  </ciManagement>
+
+  <build>
+
+    <defaultGoal>verify</defaultGoal>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>3.0.0-M2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.8.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0-M3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.1.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-report-plugin</artifactId>
+          <version>3.0.0-M3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jdeps-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.8</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.1.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.1.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.4</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.1.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>8.23</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>3.12.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>net.sourceforge.pmd</groupId>
+              <artifactId>pmd-core</artifactId>
+              <version>6.17.0</version>
+            </dependency>
+            <dependency>
+              <groupId>net.sourceforge.pmd</groupId>
+              <artifactId>pmd-java</artifactId>
+              <version>6.17.0</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <analysisCache>true</analysisCache>
+            <analysisCacheLocation>pmd.cache</analysisCacheLocation>
+            <skipEmptyReport>false</skipEmptyReport>
+            <rulesets>
+              <ruleset>pmd-conf.xml</ruleset>
+            </rulesets>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>3.1.12</version>
+          <configuration>
+            <effort>Max</effort>
+            <excludeFilterFile>spotbugs-filter.xml</excludeFilterFile>
+            <threshold>Low</threshold>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs</artifactId>
+              <version>3.1.12</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.eluder.coveralls</groupId>
+          <artifactId>coveralls-maven-plugin</artifactId>
+          <version>4.3.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <!-- compiler configuration -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <failOnWarning>true</failOnWarning>
+          <showWarnings>true</showWarnings>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <!-- package configuration -->
+      <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <version>1.18.0.372</version>
+        <extensions>true</extensions>
+        <configuration>
+          <pluginClass>tomfi.sonar.plugins.gitea.SonarPlugin</pluginClass>
+        </configuration>
+      </plugin>
+      <!-- goal enforcer:enforce binds by default to the validate phase -->
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <configuration>
+          <failFast>true</failFast>
+          <rules>
+            <banDistributionManagement/>
+            <banDuplicatePomDependencyVersions/>
+            <!--<banTransitiveDependencies/>-->
+            <!--<dependencyConvergence/>-->
+            <requireJavaVersion>
+              <version>[1.8.,)</version>
+            </requireJavaVersion>
+            <requireMavenVersion>
+              <version>[3.6,)</version>
+            </requireMavenVersion>
+            <requireProperty>
+              <property>java.version</property>
+              <regex>1.8.*</regex>
+            </requireProperty>
+            <requireProperty>
+              <property>project.build.sourceEncoding</property>
+              <regex>UTF-8</regex>
+            </requireProperty>
+            <requireProperty>
+              <property>sonar.sources</property>
+              <regex>src/main/java</regex>
+            </requireProperty>
+            <requireReleaseDeps/>
+            <requireSameVersions>
+              <plugins>
+                <plugin>org.apache.maven.plugins:maven-surefire-plugin</plugin>
+                <plugin>org.apache.maven.plugins:maven-surefire-report-plugin</plugin>
+              </plugins>
+            </requireSameVersions>
+          </rules>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- goal xml-maven-plugin:validate is manually bound to the validate phase, by default binds to the test phase  -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>xml-maven-plugin</artifactId>
+        <version>1.0.2</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>validate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <validationSets>
+            <validationSet>
+              <dir>${basedir}</dir>
+              <includes>**/*.xml</includes>
+            </validationSet>
+          </validationSets>
+        </configuration>
+      </plugin>
+      <!-- goal license-maven-plugin:check is manually bound to the validate phase, by default binds to the verify phase -->
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <header>LICENSE</header>
+          <excludes>
+            <exclude>**/package-info.java</exclude>
+          </excludes>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- goal yaml-json-validator-maven-plugin:validate is manually bound to the validate phase -->
+      <plugin>
+        <groupId>com.github.sylvainlaurent.maven</groupId>
+        <artifactId>yaml-json-validator-maven-plugin</artifactId>
+        <version>1.0.3</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>validate</goal>
+            </goals>
+            <configuration>
+              <validationSets>
+                <validationSet>
+                  <includes>
+                    <include>*.yml</include>
+                  </includes>
+                </validationSet>
+              </validationSets>
+              <allowEmptyFiles>false</allowEmptyFiles>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- goal jdeps:jdkinternals binds by default to the process-classes phase -->
+      <plugin>
+        <artifactId>maven-jdeps-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jdkinternals</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- goal jacoco-maven-plugin:prepare-agent binds by default to the initialize phase -->
+      <!-- goal jacoco-maven-plugin:check binds by default to the verify phase and used for checking of the code cover metrics -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>prepare-jacoco-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>check-jacoco-metrics</id>
+            <goals>
+              <goal>check</goal>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit>
+                      <counter>INSTRUCTION</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>${plugin.configuration.jacoco.coverage.minimum}</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- goal checkstyle:check binds by default to the verify phase -->
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <cacheFile>${project.basedir}/checkstyle.cache</cacheFile>
+          <configLocation>checkstyle-conf.xml</configLocation>
+          <enableRSS>false</enableRSS>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- goal pmd:pmd/cpd is manually bound to the verify phase in the default lifecycle -->
+      <plugin>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>pmd</goal>
+              <goal>cpd</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- goal spotbugs:check is manually bound to the verify phase in the default lifecycle, by default binds to the test phase  -->
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+      <plugins>
+        <!-- project cross-reference report -->
+        <plugin>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>jxr</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+        <!-- project information reports -->
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <configuration>
+            <skipEmptyReport>false</skipEmptyReport>
+          </configuration>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>ci-management</report>
+                <report>dependencies</report>
+                <report>index</report>
+                <report>issue-management</report>
+                <report>licenses</report>
+                <report>plugin-management</report>
+                <report>plugins</report>
+                <report>team</report>
+                <report>scm</report>
+                <report>summary</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+        <!-- javadoc reports the goals no-fork suffix doesn't generate the sources, remove suffix if needed -->
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <configuration>
+            <doctitle>${project.name} ${project.version}</doctitle>
+            <show>private</show>
+            <nohelp>true</nohelp>
+            <windowtitle>${project.name} ${project.version}</windowtitle>
+          </configuration>
+          <reportSets>
+            <reportSet>
+              <reports>
+                  <report>javadoc-no-fork</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+        <!-- checkstyle report -->
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <configuration>
+            <cacheFile>${project.basedir}/checkstyle.cache</cacheFile>
+            <configLocation>checkstyle-conf.xml</configLocation>
+            <enableRSS>false</enableRSS>
+          </configuration>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>checkstyle</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+        <!-- pmd report -->
+        <plugin>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>pmd</report>
+                <report>cpd</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+        <!-- the goal surefire:report-only doesn't inovke the tests, invoke it manually or change goal to surefire:report -->
+        <plugin>
+          <artifactId>maven-surefire-report-plugin</artifactId>
+          <configuration>
+            <description>Junit test cases surefire report</description>
+          </configuration>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>report-only</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+        <!-- jacoco code coverage report -->
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>report</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+        <!-- spotbugs code report -->
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>spotbugs</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+      </plugins>
+  </reporting>
+
+</project>

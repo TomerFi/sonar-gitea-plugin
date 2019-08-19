@@ -1,0 +1,16 @@
+[
+    {
+        "name": "SonarQube: passed",
+        "description": "Label indicating the passing of SonarQube quality gate.",
+        "color": "#128A0C",
+        "id": 41,
+        "url": ""
+    },
+    {
+        "name": "Unrelated label",
+        "description": "Unrelated label, has no side effect.",
+        "color": "#EE0701",
+        "id": 42,
+        "url": ""
+    }
+]

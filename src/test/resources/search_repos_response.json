@@ -1,0 +1,9 @@
+{
+    "ok": true,
+    "data": [
+        {
+            "id": 17,
+            "full_name": "repoOwner/fake-gitea-repo"
+        }
+    ]
+}
