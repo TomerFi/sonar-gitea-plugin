@@ -7,7 +7,10 @@ as well as labeling it as *passed* or *failed*.
 ## Install
 
 ```shell
-mvn package
+ # linux
+./mvnw package
+ # windows
+./mvnw.cmd package
 ```
 
 Will create the `jar` file under the `maven`'s  `target` folder.</br>
