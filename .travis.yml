@@ -19,10 +19,10 @@ git:
   quiet: true
 
 before_script:
-  - mvnw clean -B -ff
+  - ./mvnw clean -B -ff
 
 script:
-  - mvnw verify -B -ff
+  - ./mvnw verify -B -ff
 
 after_success:
-  - mvnw coveralls:report -B -ff
+  - ./mvnw coveralls:report -B -ff
