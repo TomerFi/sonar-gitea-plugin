@@ -7,8 +7,12 @@ matrix:
   include:
     - jdk: oraclejdk8
       dist: trusty
+      after_success:
+        - ./mvnw sonar:sonar -Pcoverage -B -ff
     - jdk: openjdk8
       dist: xenial
+      after_success:
+        - ./mvnw coveralls:report -B -ff
 
 cache:
   directories:
@@ -20,10 +24,6 @@ git:
 
 before_script:
   - chmod +x mvnw
-  - ./mvnw clean -B -ff
 
 script:
-  - ./mvnw verify -B -ff
-
-after_success:
-  - ./mvnw coveralls:report -B -ff
+  - ./mvnw clean verify -B -ff
