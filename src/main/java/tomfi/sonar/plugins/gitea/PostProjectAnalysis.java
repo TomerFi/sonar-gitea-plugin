@@ -67,16 +67,26 @@ public final class PostProjectAnalysis implements PostProjectAnalysisTask
         final Optional<String> optToken = config.get(PROP_GITEA_TOKEN);
         if (optUrl.isPresent() && optToken.isPresent())
         {
-            final ApiWrapper api = new ApiWrapper(optUrl.get(), optToken.get(), projectManager);
-            //break if not analyzed or not gitea repository
-            if (projectManager.isAnalyzed() && api.validateRepository())
+            startApiJob(analysis, projectManager, optUrl.get(), optToken.get());
+        }
+    }
+
+    private void startApiJob(
+        final ProjectAnalysis analysis,
+        final ProjectManager projectManager,
+        final String url,
+        final String token
+    )
+    {
+        final ApiWrapper api = new ApiWrapper(url, token, projectManager);
+        //break if not analyzed or not gitea repository
+        if (projectManager.isAnalyzed() && api.validateRepository())
+        {
+            //break if not a pull request
+            final Optional<Integer> pullIssueNumber = api.retreivePullIssueNumber();
+            if (pullIssueNumber.isPresent())
             {
-                //break if not a pull request
-                final Optional<Integer> pullIssueNumber = api.retreivePullIssueNumber();
-                if (pullIssueNumber.isPresent())
-                {
-                    pushToGitea(analysis, api, pullIssueNumber.get());
-                }
+                pushToGitea(analysis, api, pullIssueNumber.get());
             }
         }
     }
@@ -92,8 +102,7 @@ public final class PostProjectAnalysis implements PostProjectAnalysisTask
         api.commentOnPullRequest(pullIssueNumber, report);
 
         //if configured, label the pr as passed or failed
-        if
-        (
+        if (
             config.get(PROP_GITEA_LABELS).isPresent()
             && Boolean.valueOf(config.get(PROP_GITEA_LABELS).get())
         )
