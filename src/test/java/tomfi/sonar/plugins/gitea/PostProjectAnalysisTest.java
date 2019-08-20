@@ -42,6 +42,7 @@ import java.io.PrintStream;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -87,6 +88,8 @@ public final class PostProjectAnalysisTest
         new Header(AUTHORIZATION, String.join(" ", "Bearer", FAKE_BEARER_TOKEN)),
         new Header(ACCEPT, APPLICATION_JSON.toString())
     );
+
+    private static final List<MockServerClient> mocksList = new ArrayList<>();
 
     private static ClientAndServer mockServer;
     private static MockServerClient getRepoSearchClient;
@@ -139,6 +142,7 @@ public final class PostProjectAnalysisTest
                     .withStatusCode(200)
                     .withBody(JsonBody.json(Func_ResourceFileToString.apply(bodyFile)))
             );
+        mocksList.add(retObj);
         return retObj;
     }
 
@@ -158,6 +162,7 @@ public final class PostProjectAnalysisTest
                 HttpResponse.response()
                     .withStatusCode(200)
             );
+        mocksList.add(retObj);
         return retObj;
     }
 
@@ -211,13 +216,15 @@ public final class PostProjectAnalysisTest
     @DisplayName("Stop the mock server and mock clients for mocking the Gitea api.")
     public static void stopMockServerClients()
     {
-        getRepoSearchClient.close();
-        getRepoPullsClient.close();
-        postIssueCommentClient.close();
-        getRepoLabelsClient.close();
-        postCreateRepoLabelClient.close();
-        getRepoPullInfoClient.close();
-        patchLabelsOnPrClient.close();
+        mocksList.stream().forEach(
+            mockPath ->
+            {
+                if (mockPath.isRunning())
+                {
+                    mockPath.close();
+                }
+            }
+        );
         mockServer.stop();
     }
 
@@ -289,6 +296,7 @@ public final class PostProjectAnalysisTest
     public void test() throws IOException
     {
         assertThat(mockServer.isRunning());
+        mocksList.stream().forEach(mockPath -> assertThat(mockPath.isRunning()));
 
         final PrintStream stdout = System.out;
         final ByteArrayOutputStream tempout = new ByteArrayOutputStream();
