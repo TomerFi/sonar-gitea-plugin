@@ -28,4 +28,4 @@ script:
   - ./mvnw clean verify -B -ff
 
 after_success:
-  - ./mvnw coveralls:report sonar:sonar -Dsonar.host.url=https://sonarcloud.io -B -ff
+  - ./mvnw coveralls:report sonar:sonar -B -ff
