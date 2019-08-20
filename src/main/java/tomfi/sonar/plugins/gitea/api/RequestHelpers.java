@@ -58,7 +58,7 @@ public final class RequestHelpers
 
     private static final List<Integer> HTTP_SUCCESS_STATUS = Arrays.asList(SC_CREATED, SC_OK);
 
-    private final transient HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Main and only constructor.

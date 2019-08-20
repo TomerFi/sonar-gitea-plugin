@@ -68,8 +68,8 @@ public final class ResponseHandlers
     private static final String GITEA_RESP_KEY_URL = "url";
     private static final String GITEA_RESP_KEY_COLOR = "color";
 
-    private final transient JsonParser jsonParser;
-    private final transient ProjectManager projectManager;
+    private final JsonParser jsonParser;
+    private final ProjectManager projectManager;
 
     /**
      * Main and only constructor.
@@ -127,7 +127,9 @@ public final class ResponseHandlers
         {
             try
             (
-                JsonReader jreader = new JsonReader(new InputStreamReader(entity.getContent(), UTF_8));
+                JsonReader jreader = new JsonReader(
+                    new InputStreamReader(entity.getContent(), UTF_8)
+                );
             )
             {
                 final JsonArray jarray = jsonParser.parse(jreader).getAsJsonArray();

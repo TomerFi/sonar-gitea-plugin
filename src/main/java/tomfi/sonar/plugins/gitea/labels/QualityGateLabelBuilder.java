@@ -81,11 +81,11 @@ public final class QualityGateLabelBuilder
         }
     }
 
-    private transient String name;
-    private transient String description;
-    private transient String color;
-    private transient int ident;
-    private transient String url;
+    private String name;
+    private String description;
+    private String color;
+    private int ident;
+    private String url;
 
     /**
      * Main constructor for starting the builder.

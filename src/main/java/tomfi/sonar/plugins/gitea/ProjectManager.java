@@ -35,7 +35,7 @@ import org.sonar.api.ce.posttask.PostProjectAnalysisTask.ProjectAnalysis;
 @SuppressWarnings("PMD.DataClass")
 public final class ProjectManager
 {
-    private final transient Optional<Analysis> optAnalysis;
+    private final Optional<Analysis> optAnalysis;
     private final String key;
     private final String name;
     private final String uuid;

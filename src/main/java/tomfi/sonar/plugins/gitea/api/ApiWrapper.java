@@ -74,11 +74,11 @@ public final class ApiWrapper
     private static final String URL_BODY_KEY_COLOR = "color";
     private static final String URL_BODY_KEY_ID = "id";
 
-    private final transient String apiUrl;
+    private final String apiUrl;
 
-    private final transient ProjectManager projectManager;
-    private final transient ResponseHandlers handlers;
-    private final transient RequestHelpers helpers;
+    private final ProjectManager projectManager;
+    private final ResponseHandlers handlers;
+    private final RequestHelpers helpers;
 
     /**
      * Main and only constructor.

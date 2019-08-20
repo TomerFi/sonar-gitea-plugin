@@ -40,15 +40,15 @@ import org.sonar.api.ce.posttask.PostProjectAnalysisTask.ProjectAnalysis;
 @SuppressWarnings("PMD.DataClass")
 public final class SonarReport
 {
-    private final transient EnumMap<EvaluationStatus, String> evaluationStatusMarks =
+    private final EnumMap<EvaluationStatus, String> evaluationStatusMarks =
         new EnumMap<>(EvaluationStatus.class);
-    private final transient EnumMap<Status, String> qualityGateStatusMarks =
+    private final EnumMap<Status, String> qualityGateStatusMarks =
         new EnumMap<>(Status.class);
     private final boolean ceTaskSuccess;
     private final String gateId;
     private final String gateName;
     private final Status gateStatus;
-    private final transient Map<String, EvaluationStatus> conditionsMap;
+    private final Map<String, EvaluationStatus> conditionsMap;
 
     /**
      * Main and only constructor.

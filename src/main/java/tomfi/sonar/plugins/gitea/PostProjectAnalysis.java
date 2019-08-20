@@ -47,7 +47,7 @@ import tomfi.sonar.plugins.gitea.labels.LabelManager;
 @ComputeEngineSide
 public final class PostProjectAnalysis implements PostProjectAnalysisTask
 {
-    private final transient Configuration config;
+    private final Configuration config;
 
     /**
      * Main and only constructor, used with dependency injection.

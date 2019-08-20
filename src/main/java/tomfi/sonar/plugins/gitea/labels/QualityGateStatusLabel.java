@@ -33,7 +33,7 @@ public final class QualityGateStatusLabel implements Label
     private final String name;
     private final String description;
     private final String color;
-    private final transient int ident;
+    private final int ident;
     private final String url;
 
     /**
