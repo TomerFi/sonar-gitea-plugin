@@ -24,22 +24,20 @@
 
 package tomfi.sonar.plugins.gitea.labels;
 
-import java.util.Optional;
-
 /**
  * Manager object for holding the Optional {@link Label} objects.
  */
 public final class LabelManager
 {
-    private final Optional<Label> passed;
-    private final Optional<Label> failed;
+    private final Label passed;
+    private final Label failed;
 
     /**
      * Main and only constructor.
      * @param passedLabel the Optional passing {@link Label} object.
      * @param failedLabel the Optional failing {@link Label} object.
      */
-    public LabelManager(final Optional<Label> passedLabel, final Optional<Label> failedLabel)
+    public LabelManager(final Label passedLabel, final Label failedLabel)
     {
         passed = passedLabel;
         failed = failedLabel;
@@ -47,16 +45,11 @@ public final class LabelManager
 
     public Label getPassed()
     {
-        return passed.get();
+        return passed;
     }
 
     public Label getFailed()
     {
-        return failed.get();
-    }
-
-    public boolean gotLabels()
-    {
-        return passed.isPresent() && failed.isPresent();
+        return failed;
     }
 }

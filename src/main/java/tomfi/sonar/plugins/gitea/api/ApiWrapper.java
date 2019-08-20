@@ -196,7 +196,11 @@ public final class ApiWrapper
                 ? labels.get(0) : createNewLabel(repoLabelsUrl, Labels.PASSED);
             final Optional<Label> failed = labels.get(1).isPresent()
                 ? labels.get(1) : createNewLabel(repoLabelsUrl, Labels.FAILED);
-            retValue = Optional.of(new LabelManager(passed, failed));
+
+            if (passed.isPresent() && failed.isPresent())
+            {
+                retValue = Optional.of(new LabelManager(passed.get(), failed.get()));
+            }
         }
         return retValue;
     }
