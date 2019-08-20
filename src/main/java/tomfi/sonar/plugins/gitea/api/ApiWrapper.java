@@ -24,6 +24,7 @@
 
 package tomfi.sonar.plugins.gitea.api;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static tomfi.sonar.plugins.gitea.labels.QualityGateLabelBuilder.Labels;
 
 import com.google.gson.GsonBuilder;
@@ -55,8 +56,6 @@ public final class ApiWrapper
     /**
      * Contant field holding the default charset name.
      */
-    public static final String CHARSET_NAME = "UTF-8";
-
     private static final String URL_FMT_REPOS_SEARCH = "%s/repos/search%s";
     private static final String URL_FMT_REPOS_PULL_INFO = "%s/repos/%s/pulls/%d";
     private static final String URL_FMT_REPOS_PULLS = "%s/repos/%s/pulls%s";
@@ -164,7 +163,7 @@ public final class ApiWrapper
 
             //create http entity from json body
             final StringEntity bodyEntity = new StringEntity(
-                body.toString(), ContentType.APPLICATION_JSON.withCharset(CHARSET_NAME)
+                body.toString(), ContentType.APPLICATION_JSON.withCharset(UTF_8)
             );
 
             //send reuqest
@@ -212,7 +211,7 @@ public final class ApiWrapper
 
         //create http entity from json body
         final StringEntity bodyEntity = new StringEntity(
-            body.toString(), ContentType.APPLICATION_JSON.withCharset(CHARSET_NAME)
+            body.toString(), ContentType.APPLICATION_JSON.withCharset(UTF_8)
         );
 
         Optional<Label> retValue = Optional.empty();
@@ -306,7 +305,7 @@ public final class ApiWrapper
 
             //create http entity from json body
             final StringEntity bodyEntity = new StringEntity(
-                newBody.toString(), ContentType.APPLICATION_JSON.withCharset(CHARSET_NAME)
+                newBody.toString(), ContentType.APPLICATION_JSON.withCharset(UTF_8)
             );
 
             //send reuqest

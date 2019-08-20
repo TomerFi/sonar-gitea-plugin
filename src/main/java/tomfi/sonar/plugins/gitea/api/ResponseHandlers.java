@@ -24,7 +24,7 @@
 
 package tomfi.sonar.plugins.gitea.api;
 
-import static tomfi.sonar.plugins.gitea.api.ApiWrapper.CHARSET_NAME;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -91,9 +91,7 @@ public final class ResponseHandlers
         boolean retValue = false;
         try
         (
-            JsonReader jreader = new JsonReader(
-                new InputStreamReader(entity.getContent(), CHARSET_NAME)
-            );
+            JsonReader jreader = new JsonReader(new InputStreamReader(entity.getContent(), UTF_8));
         )
         {
             final JsonObject jobject = jsonParser.parse(jreader).getAsJsonObject();
@@ -129,9 +127,7 @@ public final class ResponseHandlers
         {
             try
             (
-                JsonReader jreader = new JsonReader(
-                    new InputStreamReader(entity.getContent(), CHARSET_NAME)
-                );
+                JsonReader jreader = new JsonReader(new InputStreamReader(entity.getContent(), UTF_8));
             )
             {
                 final JsonArray jarray = jsonParser.parse(jreader).getAsJsonArray();
@@ -169,9 +165,7 @@ public final class ResponseHandlers
         Optional<Label> failed = Optional.empty();
         try
         (
-            JsonReader jreader = new JsonReader(
-                new InputStreamReader(entity.getContent(), CHARSET_NAME)
-            );
+            JsonReader jreader = new JsonReader(new InputStreamReader(entity.getContent(), UTF_8));
         )
         {
             final JsonArray jarray = jsonParser.parse(jreader).getAsJsonArray();
@@ -209,9 +203,7 @@ public final class ResponseHandlers
         Optional<Label> retValue = Optional.empty();
         try
         (
-            JsonReader jreader = new JsonReader(new InputStreamReader(
-                entity.getContent(), CHARSET_NAME)
-            );
+            JsonReader jreader = new JsonReader(new InputStreamReader(entity.getContent(), UTF_8));
         )
         {
             final JsonObject jobject = jsonParser.parse(jreader).getAsJsonObject();
@@ -244,9 +236,7 @@ public final class ResponseHandlers
         Optional<JsonObject> retValue = Optional.empty();
         try
         (
-            JsonReader jreader = new JsonReader(
-                new InputStreamReader(entity.getContent(), CHARSET_NAME)
-            );
+            JsonReader jreader = new JsonReader(new InputStreamReader(entity.getContent(), UTF_8));
         )
         {
             retValue = Optional.of(jsonParser.parse(jreader).getAsJsonObject());
