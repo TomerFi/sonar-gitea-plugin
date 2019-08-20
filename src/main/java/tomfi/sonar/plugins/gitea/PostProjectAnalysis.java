@@ -35,6 +35,7 @@ import java.util.Optional;
 
 import org.sonar.api.ce.ComputeEngineSide;
 import org.sonar.api.ce.posttask.PostProjectAnalysisTask;
+import org.sonar.api.ce.posttask.QualityGate;
 import org.sonar.api.config.Configuration;
 
 import tomfi.sonar.plugins.gitea.api.ApiWrapper;
@@ -86,37 +87,49 @@ public final class PostProjectAnalysis implements PostProjectAnalysisTask
             final Optional<Integer> pullIssueNumber = api.retreivePullIssueNumber();
             if (pullIssueNumber.isPresent())
             {
-                pushToGitea(analysis, api, pullIssueNumber.get());
+                pushComment(analysis, api, pullIssueNumber.get());
             }
         }
     }
 
-    private void pushToGitea(
+    private void pushComment(
         final ProjectAnalysis analysis, final ApiWrapper api, final int pullIssueNumber
     )
     {
-        //create a report
-        final SonarReport report = new SonarReport(analysis);
-
-        //add a comment to the pr conversation
-        api.commentOnPullRequest(pullIssueNumber, report);
-
-        //if configured, label the pr as passed or failed
-        if (
-            config.get(PROP_GITEA_LABELS).isPresent()
-            && Boolean.valueOf(config.get(PROP_GITEA_LABELS).get())
-        )
+        final Optional<QualityGate> qGate = Optional.ofNullable(analysis.getQualityGate());
+        if (qGate.isPresent())
         {
-            final Optional<LabelManager> labels = api.getLabels();
-            if (labels.isPresent())
+            //create a report
+            final SonarReport report = new SonarReport(analysis.getCeTask(), qGate.get());
+
+            //add a comment to the pr conversation
+            api.commentOnPullRequest(pullIssueNumber, report);
+
+            //if configured, label the pr as passed or failed
+            if (
+                config.get(PROP_GITEA_LABELS).isPresent()
+                && Boolean.valueOf(config.get(PROP_GITEA_LABELS).get())
+            )
             {
-                final LabelManager labelManager = labels.get();
-                final Label addLabel = report.getGateStatus().compareTo(Status.OK) == 0
-                    ? labelManager.getPassed() : labelManager.getFailed();
-                final Label removeLabel = report.getGateStatus().compareTo(Status.OK) == 0
-                    ? labelManager.getFailed() : labelManager.getPassed();
-                api.updatePullLabels(pullIssueNumber, addLabel, Arrays.asList(removeLabel));
+                pushLabels(api, pullIssueNumber, report);
             }
         }
     }
+
+    private void pushLabels(
+        final ApiWrapper api, final int pullIssueNumber, final SonarReport report
+    )
+    {
+        final Optional<LabelManager> labels = api.getLabels();
+        if (labels.isPresent())
+        {
+            final LabelManager labelManager = labels.get();
+            final Label addLabel = report.getGateStatus().compareTo(Status.OK) == 0
+                ? labelManager.getPassed() : labelManager.getFailed();
+            final Label removeLabel = report.getGateStatus().compareTo(Status.OK) == 0
+                ? labelManager.getFailed() : labelManager.getPassed();
+            api.updatePullLabels(pullIssueNumber, addLabel, Arrays.asList(removeLabel));
+        }
+    }
+
 }

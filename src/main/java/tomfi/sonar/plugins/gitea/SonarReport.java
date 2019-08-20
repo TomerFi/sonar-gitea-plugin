@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.sonar.api.ce.posttask.CeTask;
-import org.sonar.api.ce.posttask.PostProjectAnalysisTask.ProjectAnalysis;
+import org.sonar.api.ce.posttask.QualityGate;
 
 /**
  * Class for producing a report for pushing to Gitea.
@@ -52,9 +52,10 @@ public final class SonarReport
 
     /**
      * Main and only constructor.
-     * @param analysis the ProjectAnalysis object for extracting the data from.
-    */
-    public SonarReport(final ProjectAnalysis analysis)
+     * @param ceTask the CeTask object for getting the task status.
+     * @param qualityGate the QualityGate associated with the project.
+     */
+    public SonarReport(final CeTask ceTask, final QualityGate qualityGate)
     {
         qualityGateStatusMarks.put(Status.OK, ":ok_hand:");
         qualityGateStatusMarks.put(Status.ERROR, ":confused:");
@@ -63,16 +64,14 @@ public final class SonarReport
         evaluationStatusMarks.put(EvaluationStatus.ERROR, ":x:");
         evaluationStatusMarks.put(EvaluationStatus.NO_VALUE, ":heavy_minus_sign:");
 
-        ceTaskSuccess = analysis.getCeTask().getStatus().compareTo(CeTask.Status.SUCCESS) == 0;
-        gateId = analysis.getQualityGate().getId();
-        gateName = analysis.getQualityGate().getName();
-        gateStatus = analysis.getQualityGate().getStatus();
+        ceTaskSuccess = ceTask.getStatus().compareTo(CeTask.Status.SUCCESS) == 0;
+        gateId = qualityGate.getId();
+        gateName = qualityGate.getName();
+        gateStatus = qualityGate.getStatus();
 
         conditionsMap = new HashMap<>();
-        analysis.getQualityGate().getConditions().stream()
-            .forEach(
-                condition -> conditionsMap.put(condition.getMetricKey(), condition.getStatus()
-            )
+        qualityGate.getConditions().stream().forEach(
+            condition -> conditionsMap.put(condition.getMetricKey(), condition.getStatus())
         );
     }
 
