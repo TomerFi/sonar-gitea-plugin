@@ -288,6 +288,8 @@ public final class PostProjectAnalysisTest
     @Test
     public void test() throws IOException
     {
+        assertThat(mockServer.isRunning());
+
         final PrintStream stdout = System.out;
         final ByteArrayOutputStream tempout = new ByteArrayOutputStream();
 
