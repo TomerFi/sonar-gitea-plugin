@@ -312,26 +312,12 @@
           <rules>
             <banDistributionManagement/>
             <banDuplicatePomDependencyVersions/>
-            <!--<banTransitiveDependencies/>-->
-            <!--<dependencyConvergence/>-->
             <requireJavaVersion>
               <version>[1.8.,)</version>
             </requireJavaVersion>
             <requireMavenVersion>
               <version>[3.6,)</version>
             </requireMavenVersion>
-            <requireProperty>
-              <property>java.version</property>
-              <regex>1.8.*</regex>
-            </requireProperty>
-            <requireProperty>
-              <property>project.build.sourceEncoding</property>
-              <regex>UTF-8</regex>
-            </requireProperty>
-            <requireProperty>
-              <property>sonar.sources</property>
-              <regex>src/main/java</regex>
-            </requireProperty>
             <requireReleaseDeps/>
             <requireSameVersions>
               <plugins>
