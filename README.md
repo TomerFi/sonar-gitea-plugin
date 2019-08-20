@@ -30,7 +30,7 @@ After restarting, the plugin configuration will be added to administration contr
 ## How does it work
 
 If configured, the plugin will check if the project's repository is a `Gitea` repository.</br>
-If so, tt will push the `QualityGate` result metrics to the pull request conversation as so:</br>
+If so, it will push the `QualityGate` result metrics to the pull request conversation as so:</br>
 
 ![Comment](pics/plugin-comment.jpg)
 
