@@ -26,6 +26,7 @@ package tomfi.sonar.plugins.gitea.api;
 
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 /**
  * Url tools class.
@@ -38,7 +39,7 @@ public final class UrlUtils
     /**
      * Function concatinating SonarQube V1 api uri to the provided base uri.
      */
-    public static final Function<String, String> Func_GetBaseApiUrl = origin ->
+    public static final UnaryOperator<String> Func_GetBaseApiUrl = origin ->
     {
         final int lastIndex = origin.length() - 1;
         final String result =
