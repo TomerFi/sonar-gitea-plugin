@@ -63,20 +63,20 @@ public final class PostProjectAnalysis implements PostProjectAnalysisTask
     {
         //create the project manager and api wrapper
         final ProjectManager projectManager = new ProjectManager(analysis);
-        final ApiWrapper api = new ApiWrapper(
-            config.get(PROP_GITEA_URL).get(),
-            config.get(PROP_GITEA_TOKEN).get(),
-            projectManager
-        );
-
-        //break if not analyzed or not gitea repository
-        if (projectManager.isAnalyzed() && api.validateRepository())
+        final Optional<String> optUrl = config.get(PROP_GITEA_URL);
+        final Optional<String> optToken = config.get(PROP_GITEA_TOKEN);
+        if (optUrl.isPresent() && optToken.isPresent())
         {
-            //break if not a pull request
-            final Optional<Integer> pullIssueNumber = api.retreivePullIssueNumber();
-            if (pullIssueNumber.isPresent())
+            final ApiWrapper api = new ApiWrapper(optUrl.get(), optToken.get(), projectManager);
+            //break if not analyzed or not gitea repository
+            if (projectManager.isAnalyzed() && api.validateRepository())
             {
-                pushToGitea(analysis, api, pullIssueNumber.get());
+                //break if not a pull request
+                final Optional<Integer> pullIssueNumber = api.retreivePullIssueNumber();
+                if (pullIssueNumber.isPresent())
+                {
+                    pushToGitea(analysis, api, pullIssueNumber.get());
+                }
             }
         }
     }
@@ -92,7 +92,11 @@ public final class PostProjectAnalysis implements PostProjectAnalysisTask
         api.commentOnPullRequest(pullIssueNumber, report);
 
         //if configured, label the pr as passed or failed
-        if (Boolean.valueOf(config.get(PROP_GITEA_LABELS).get()))
+        if
+        (
+            config.get(PROP_GITEA_LABELS).isPresent()
+            && Boolean.valueOf(config.get(PROP_GITEA_LABELS).get())
+        )
         {
             final Optional<LabelManager> labels = api.getLabels();
             if (labels.isPresent())

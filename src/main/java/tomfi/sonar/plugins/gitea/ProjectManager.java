@@ -51,8 +51,7 @@ public final class ProjectManager
         key = analysis.getProject().getKey();
         name = analysis.getProject().getName();
         uuid = analysis.getProject().getUuid();
-        revision = analysis.getAnalysis().isPresent()
-            ? optAnalysis.get().getRevision() : Optional.empty();
+        revision = optAnalysis.isPresent()? optAnalysis.get().getRevision() : Optional.empty();
     }
 
     public boolean isAnalyzed()
