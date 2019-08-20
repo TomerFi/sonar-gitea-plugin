@@ -68,7 +68,7 @@ public final class SonarReport
         gateName = analysis.getQualityGate().getName();
         gateStatus = analysis.getQualityGate().getStatus();
 
-        conditionsMap = new HashMap<String, EvaluationStatus>();
+        conditionsMap = new HashMap<>();
         analysis.getQualityGate().getConditions().stream()
             .forEach(
                 condition -> conditionsMap.put(condition.getMetricKey(), condition.getStatus()

@@ -187,7 +187,7 @@ public final class ResponseHandlers
         {
             LOG.error(exc.getMessage());
         }
-        final List<Optional<Label>> labelList = new ArrayList<Optional<Label>>(2);
+        final List<Optional<Label>> labelList = new ArrayList<>(2);
         labelList.add(passed);
         labelList.add(failed);
         return labelList;

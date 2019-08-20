@@ -101,7 +101,7 @@ public final class ApiWrapper
     public boolean validateRepository()
     {
         //create param query string
-        final Map<String, String> paramMap = new ConcurrentHashMap<String, String>();
+        final Map<String, String> paramMap = new ConcurrentHashMap<>();
         paramMap.put(URL_PARAM_KEY_QUERY, projectManager.getName().split("/")[1]);
 
         //create url for request
@@ -125,7 +125,7 @@ public final class ApiWrapper
     public Optional<Integer> retreivePullIssueNumber()
     {
         //create param query string
-        final Map<String, String> paramMap = new ConcurrentHashMap<String, String>();
+        final Map<String, String> paramMap = new ConcurrentHashMap<>();
         paramMap.put(URL_PARAM_KEY_STATE, URL_PARAM_VALUE_OPEN);
 
         //create url for request
@@ -270,8 +270,8 @@ public final class ApiWrapper
     )
     {
         //if label exists and needs to be removed
-        final List<Integer> labelIds = new ArrayList<Integer>();
-        final List<Integer> removeIds = new ArrayList<Integer>(2);
+        final List<Integer> labelIds = new ArrayList<>();
+        final List<Integer> removeIds = new ArrayList<>(2);
         for (final Label label : removeLabels)
         {
             removeIds.add(label.getId());
