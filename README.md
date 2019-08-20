@@ -4,7 +4,7 @@ This project is WIP (work in progress), a pre-release.</br>
 The idea is a `SonarQube` plugin that adds a comment containing the QualityGate metrics to `Gitea`'s pull reqeusts,</br>
 as well as labeling it as *passed* or *failed*.
 
-## Install
+## Installing
 
 ```shell
  # linux
@@ -46,7 +46,8 @@ Please check the [CONTRIBUTING.md](CONTRIBUTING.md) before contributing.
 
 ## Code of Conduct
 
-Please check the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before contributing.
+Please check the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before opening an issue,
+a pull request or contributing.
 
 ## License
 
