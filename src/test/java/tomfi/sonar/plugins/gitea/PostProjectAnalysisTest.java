@@ -63,6 +63,7 @@ import org.mockserver.model.HttpRequest;
 import org.mockserver.model.HttpResponse;
 import org.mockserver.model.JsonBody;
 import org.mockserver.model.RegexBody;
+
 import org.sonar.api.ce.posttask.PostProjectAnalysisTask.ProjectAnalysis;
 import org.sonar.api.ce.posttask.QualityGate.Condition;
 import org.sonar.api.ce.posttask.Analysis;
@@ -295,8 +296,8 @@ public final class PostProjectAnalysisTest
     @Test
     public void test() throws IOException
     {
-        assertThat(mockServer.isRunning());
-        mocksList.stream().forEach(mockPath -> assertThat(mockPath.isRunning()));
+        assertThat(mockServer.isRunning()).isTrue();
+        mocksList.stream().forEach(mockPath -> assertThat(mockPath.isRunning()).isTrue());
 
         final PrintStream stdout = System.out;
         final ByteArrayOutputStream tempout = new ByteArrayOutputStream();
