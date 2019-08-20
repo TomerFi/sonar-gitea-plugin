@@ -6,7 +6,7 @@ dist: trusty
 
 addons:
   sonarcloud:
-    organization: "tomerfi"
+    organization: tomerfi
 
 jdk:
   - oraclejdk8
