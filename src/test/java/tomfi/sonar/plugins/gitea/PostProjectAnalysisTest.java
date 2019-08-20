@@ -143,7 +143,6 @@ public final class PostProjectAnalysisTest
                     .withStatusCode(200)
                     .withBody(JsonBody.json(Func_ResourceFileToString.apply(bodyFile)))
             );
-        mocksList.add(retObj);
         return retObj;
     }
 
@@ -163,7 +162,6 @@ public final class PostProjectAnalysisTest
                 HttpResponse.response()
                     .withStatusCode(200)
             );
-        mocksList.add(retObj);
         return retObj;
     }
 
@@ -177,11 +175,13 @@ public final class PostProjectAnalysisTest
             "/api/v1/repos/search",
             "search_repos_response.json"
         );
+        mocksList.add(getRepoSearchClient);
         getRepoPullsClient = registerClientWithResponseJson(
             Method.GET,
             String.format("/api/v1/repos/%s/pulls", FAKE_REPO_FULL_NAME),
             "get_pulls_response.json"
         );
+        mocksList.add(getRepoPullsClient);
         postIssueCommentClient = registerClientWithRequestRegex(
             Method.POST,
             String.format(
@@ -191,26 +191,31 @@ public final class PostProjectAnalysisTest
             ),
             "comment_on_issue_request_regex.txt"
         );
+        mocksList.add(postIssueCommentClient);
         getRepoLabelsClient = registerClientWithResponseJson(
             Method.GET,
             String.format("/api/v1/repos/%s/labels", FAKE_REPO_FULL_NAME),
             "get_repo_labels_result.json"
         );
+        mocksList.add(getRepoLabelsClient);
         postCreateRepoLabelClient = registerClientWithResponseJson(
             Method.POST,
             String.format("/api/v1/repos/%s/labels", FAKE_REPO_FULL_NAME),
             "create_repo_label_result.json"
         );
+        mocksList.add(postCreateRepoLabelClient);
         getRepoPullInfoClient = registerClientWithResponseJson(
             Method.GET,
             String.format("/api/v1/repos/%s/pulls/%d", FAKE_REPO_FULL_NAME, FAKE_PR_ISSUE_NUMBER),
             "get_repo_pull_info.json"
         );
+        mocksList.add(getRepoPullInfoClient);
         patchLabelsOnPrClient = registerClientWithRequestRegex(
             Method.PATCH,
             String.format("/api/v1/repos/%s/pulls/%d", FAKE_REPO_FULL_NAME, FAKE_PR_ISSUE_NUMBER),
             "patch_labels_on_pr_result.txt"
         );
+        mocksList.add(patchLabelsOnPrClient);
     }
 
     @AfterAll
