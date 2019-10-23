@@ -1,5 +1,4 @@
-# Gitea SonarQube Plugin</br>[![quality-gate-status]][3] [![maintainability-rating]][3] [![reliability-rating]][3] [![security-rating]][3]</br>[![shields-io-maintenance]][0] [![travis-build-status]][1] [![coveralls-coverage-status]][2]
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FTomerFi%2Fsonar-gitea-plugin.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FTomerFi%2Fsonar-gitea-plugin?ref=badge_shield)
+# Gitea SonarQube Plugin</br>[![quality-gate-status]][3] [![maintainability-rating]][3] [![reliability-rating]][3] [![security-rating]][3]</br>[![shields-io-maintenance]][0] [![travis-build-status]][1] [![coveralls-coverage-status]][2] [![license-scan-status]][4]
 
 This project is WIP (work in progress), a pre-release.</br>
 The idea is a `SonarQube` plugin that decorates `Gitea`'s pull reqeusts
@@ -59,9 +58,11 @@ a pull request or contributing.
 [1]: https://travis-ci.org/TomerFi/sonar-gitea-plugin
 [2]: https://coveralls.io/github/TomerFi/sonar-gitea-plugin
 [3]: https://sonarcloud.io/dashboard?id=info.tomfi%3Asonar-gitea-plugin
+[4]: https://app.fossa.io/projects/git%2Bgithub.com%2FTomerFi%2Fsonar-gitea-plugin
 
 <!-- Badges Links -->
 [coveralls-coverage-status]: https://coveralls.io/repos/github/TomerFi/sonar-gitea-plugin/badge.svg
+[license-scan-status]: https://app.fossa.io/api/projects/git%2Bgithub.com%2FTomerFi%2Fsonar-gitea-plugin.svg?type=shield
 [maintainability-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=sqale_rating
 [reliability-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=reliability_rating
 [security-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=security_rating
@@ -69,6 +70,3 @@ a pull request or contributing.
 [technical-debt]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=sqale_index
 [travis-build-status]: https://travis-ci.org/TomerFi/sonar-gitea-plugin.svg?branch=dev
 [quality-gate-status]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Asonar-gitea-plugin&metric=alert_status
-
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FTomerFi%2Fsonar-gitea-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FTomerFi%2Fsonar-gitea-plugin?ref=badge_large)
