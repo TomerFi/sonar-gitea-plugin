@@ -6,7 +6,7 @@
 
   <groupId>info.tomfi</groupId>
   <artifactId>sonar-gitea-plugin</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <packaging>sonar-plugin</packaging>
 
   <dependencies>
